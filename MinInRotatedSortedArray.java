@@ -24,16 +24,34 @@ public class MinInRotatedSortedArray
             }
 
             middle = (start + end) / 2;
-            if (nums[middle] > nums[start])
+            if (nums[middle] == nums[start] && nums[middle] == nums[end])
+            {
+                return minInOrder(nums, start, end);
+            }
+
+            if (nums[middle] >= nums[start])
             {
                 start = middle;
             }
-            else if (nums[middle] < nums[end])
+            else if (nums[middle] <= nums[end])
             {
                 end = middle;
             }
         }
 
         return nums[middle];
+    }
+
+    private int minInOrder(final int[] nums, final int start, final int end)
+    {
+        int min = nums[start];
+        for (int i = start; i <= end; i++)
+        {
+            if (nums[i] < min)
+            {
+                min = nums[i];
+            }
+        }
+        return min;
     }
 }
